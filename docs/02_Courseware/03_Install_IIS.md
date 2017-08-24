@@ -8,9 +8,11 @@ Since, for this example, we will be deploying and hosting a basic, static websit
 
   1. Open PowerShell in elevated mode (with Administrator privileges):
      <img src="../images/pwershell-admin.png" class="block"/>
-  2. Type the command `Install-WindowsFeature -Name Web-Server, Web-Mgmt-Tools`
+  2. Type and execute the command `Install-WindowsFeature -Name Web-Server, Web-Mgmt-Tools, NET-Framework-45-ASPNET, Web-App-Dev, Web-Net-Ext, Web-Net-Ext45, Web-AppInit, Web-Asp-Net, Web-Asp-Net45, Web-ISAPI-Ext, Web-ISAPI-Filter`
   3. You should then see the components download and install.
      <img src="../images/install-iis.jpg" class="block"/>
+  4. It shouldn't be necessary, but just to be safe, let's reset IIS to pickup the installation of any additional modules. Type the following and press Enter: `iisreset /restart`
+  5. We should then see some messages telling us that IIS restarted successfully.
 
 ## Configure Firewall
 The last step to configuring our server is to allow IIS to serve webpages through port 80.  By default, the port is blocked and so, even if IIS was running, we would not be able to access the site outside of the server, itself.  We, again, are going to use PowerShell to configure the firewall.
