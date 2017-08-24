@@ -1,0 +1,33 @@
+{
+    "title": "Docker Automation with Dockerfiles (Windows)",
+    "tagline": "Azure Workshops",
+    "lead": "Learn how to automate the build of a custom Windows-based Docker image from a Dockerfile.",
+    "description": "This workshop will show you how to automate the building and configuring of a Windows-based Docker image by utilizing Dockerfiles.  You will construct a Dockerfile by mimicking a production environment configuration. You'll also learn some of the options for a Dockerfile configuration.",
+    "learn": [
+        "Constructing a Dockerfile for Windows-based Builds",
+        "Various Dockerfile Configuration Options",
+        "Building a Docker Image from a Dockerfile"
+    ],
+    "audience": [
+        "IT Managers",
+        "Developers and Software Architects",
+        "Configuration and Change Managers",
+        "DevOps Engineers"
+    ],    
+    "author": "Joshua Davis",
+    "timezone": "America/New_York",
+    "format": "html",
+    "processor": "Processor",
+    "html": {
+        "theme": "azure-white",
+        "float": false,
+        "search": false,
+        "toggle_code": false,
+        "breadcrumbs": true,
+        "breadcrumb_separator": " / ",
+        "date_modified": true,
+        "twitter": [
+            "azureworkshops"
+        ]
+    }
+}
