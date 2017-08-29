@@ -64,11 +64,11 @@ This will take a second, but after the save has been completed, the _Static_ but
 Now, let's set the static IP on the virtual machine.
 
   1. On the VM, at the PowerShell prommpt (as Administrator), type `netsh interface show interface`.  You will see something like the following table: 
-     <img src="../images/netsh_interface_show_interface.jpg" class="block"/>
+     <br /><img src="../images/netsh_interface_show_interface.jpg" class="block"/><br />
      The _vEthernet_ is a virtual adapter added by Docker.  It's the internal, NAT adapter.  We want the _Ethernet_ adapter.  In our case, it's **Ethernet 2**, but it could be 1, 3 or some other number.  It's our primary adapter provided to us by Hyper-V.
 
   2. Again, at the PowerShell prompt, type `netsh interface ip show config name="Ethernet 2"` (obviously, substitute "Ethernet 2" for the name of your ethernet adapter if it is different). **IMPORTANT:** Keep this information handy as you will need it for a couple of steps below. 
-     <img src="../images/netsh_interface_show_config.jpg" class="block"/>
+     <br /><img src="../images/netsh_interface_show_config.jpg" class="block"/><br />
      This will show us the necessary configuration (outlined with a red border) to manually configure our adapter settings.
   
   3. At the PowerShell prompt, type `ncpa.cpl`.  This will show something like the following. <img src="../images/network_connections.jpg" class="block"/>
@@ -84,7 +84,7 @@ Now, let's set the static IP on the virtual machine.
   8. Click **Close**. (NOTE: You may _temporarily_ lose your connection, but you should automatically be reconnected within a few seconds.)
 
 ### Create a Transparent Network
-We are now ready to create a _Transparent_, or Host, network within Docker that will allow us to create containers that have IP addresses on the parent virtual machine's subnet.  This will provide a direct route from our inside or outside our network to the container.
+We are now ready to create a _Transparent_, or Host, network within Docker that will allow us to create containers that have IP addresses on the parent virtual machine's subnet.  This will provide a direct route from inside or outside of our network to the container.
 
 Let's start by examining the current networks Docker has created for us.
 
