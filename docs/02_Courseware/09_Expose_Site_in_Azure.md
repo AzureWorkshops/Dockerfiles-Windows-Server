@@ -75,7 +75,8 @@ Now, let's set the static IP on the virtual machine.
 
   4. Right-click on your primary ethernet adapter (e.g. "Ethernet 2").  Select **Properties**.
 
-  5. In the dialog window, select **Internet Protocol Version 4 (TCP/IPv4)** and click on **Properties**. <img src="../images/ethernet_properties.jpg" class="block"/>
+  5. In the dialog window, select **Internet Protocol Version 4 (TCP/IPv4)** and click on **Properties**.
+     <br /><img src="../images/ethernet_properties.jpg" class="block"/>
 
   6. In this dialog, select **Use the following IP address:** and **Use the following DNS server addresses:**.  Additionally, enter the information you acquired from the previous PowerShell `netsh` command.  Your information may not be exactly like below (again, compare the information to the `netsh` output), but it should like similar. <img src="../images/tcpip_properties.jpg" class="block"/>
 
