@@ -21,7 +21,7 @@ Just like any other operating system, updates are periodically released to suppo
 We now have an updated Windows operating system.  We are ready to install Docker.
 
   1. Open a PowerShell prompt as an Administrator:
-  <img src="../images/pwershell-admin.png" class="block"/>
+  <img src="../images/powershell-admin.png" class="block"/>
 
   2. At the prompt, type the following:
   ```ps

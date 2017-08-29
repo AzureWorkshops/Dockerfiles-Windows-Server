@@ -5,7 +5,7 @@ The final two elements of preparing our Windows Server virtual machine is to ins
 Since, for this example, we will be deploying and hosting a basic, static website, the standard IIS components are sufficient.  We could install them through the Server Manager, but we are going to use PowerShell so that we become familiar with executing tasks for later when we need to automate this process in Docker.
 
   1. Open PowerShell in elevated mode (with Administrator privileges):
-     <img src="../images/pwershell-admin.png" class="block"/>
+     <img src="../images/powershell-admin.png" class="block"/>
   2. Type and execute the command:
      ```ps
      Install-WindowsFeature -Name Web-Server, Web-Mgmt-Tools, NET-Framework-45-ASPNET, Web-App-Dev, Web-Net-Ext45, Web-AppInit, Web-Asp-Net45, Web-ISAPI-Ext, Web-ISAPI-Filter
