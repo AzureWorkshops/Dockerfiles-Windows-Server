@@ -26,9 +26,9 @@ test/simpleweb      latest              9f4ec58ca830        3 minutes ago       
 microsoft/iis       latest              4f803ffceb53        37 hours ago        10.6GB
 ```
 
-Our image has been built using the specified repository name. You'll also notice that the `microsoft/iis` image has been downloaded.  This is because the build process required Windows Server with IIS in order to build our image.  Now that our image has been built, you could delete the `microsoft/iis` image if you wanted to.  Finally, when looking at the image sizes, you'll see that our image is 500MB larger due installation Microsoft.NET, ASP.NET and other dependencies. 
+Our image has been built using the specified repository name. You'll also notice that the `microsoft/iis` image has been downloaded.  This is because the build process required Windows Server with IIS in order to build our image.  Now that our image has been built, you could delete the `microsoft/iis` image if you wanted to.  Finally, when looking at the image sizes, you'll see that our image is 500MB larger due to the installation of Microsoft.NET, ASP.NET and other dependencies. 
 
-Be aware that the Nano Server image is only 1.07GB compared to the full Windows Server at 10.6GB which makes Nano Server more ideal for containers.  It's really not the best scenario to use Windows Server in production as downloading 10.6GB and deploying that across your enterpise could consume a lot of bandwidth.  For production, it's best to opt for Nano Server.  But, again, Nano Server requires a little more preparation that extends a tad further beyond the scope of this workshop.
+Be aware that the Nano Server image is only 1.07GB compared to the full Windows Server at 10.6GB which makes Nano Server more ideal for containers.  Its really not best practice to use Windows Server in production as downloading 10.6GB and deploying that across your enterpise could consume a lot of bandwidth.  For production, it's best to opt for Nano Server.  But, again, Nano Server requires a little more preparation that extends a tad further beyond the scope of this workshop.
 
 ## View Image History
 What if we wanted to see how our image is constructed? Or, what if we wanted to see exactly how much disk space each layer of our image required? We could find this out by checking the image's history.

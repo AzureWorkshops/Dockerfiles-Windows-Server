@@ -32,9 +32,9 @@ This will take a couple of seconds to complete.
 ## Docker Networking
 Full disclosure, the Docker Networking topic is a very deep and complicated subject.  There are many ways to accomplish this, especially, if you are using an orchestrator such as Docker Swarm or Kubernetes.  We typically want a networking configuration that allows us to dynamically add containers (services) and have them auto-discovered.  This is particularly critical for services that should autoscale based on demand.
 
-For our workshop, we are going to sidestep this conversation and leave it to another workshop.  Instead, we are going to create a network schema that will allow us to expose our individual containers _manually_ via an IP address.  In our case, we want a configuration that is similar to what's known as a _Host_ mapping.  By default, Docker on Windows create a NAT network.  Therefore, we need to create our Host network manually.  In Docker, this type of network configuration is known as _Transparent_.
+For our workshop, we are going to sidestep this conversation and leave it to another workshop.  Instead, we are going to create a network schema that will allow us to expose our individual containers _manually_ via an IP address.  In our case, we want a configuration that is similar to what's known as a _Host_ mapping.  By default, Docker on Windows only creates a NAT network.  Therefore, we need to create our Host network manually.  In Docker, this type of network configuration is known as _Transparent_.
 
-For next section, you will be switching back and forth between the Azure portal and your VM.  Keep both open.
+For the next section, you will be switching back and forth between the Azure portal and your VM.  Keep both open.
 
 ### Set Server Static IP
 When we created our VM, we opt'ed that the virtual machine's _internal_ IP was set dynamically.  We now want to set it to a static internal IP; and, we have to do this in two places - Azure portal and the VM, itself.
