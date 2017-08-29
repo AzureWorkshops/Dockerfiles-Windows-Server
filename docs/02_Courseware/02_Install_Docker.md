@@ -20,7 +20,10 @@ Just like any other operating system, updates are periodically released to suppo
 ## Install Docker
 We now have an updated Windows operating system.  We are ready to install Docker.
 
-  1. Open a PowerShell prompt as an Administrator and type the following:
+  1. Open a PowerShell prompt as an Administrator:
+  <img src="../images/pwershell-admin.png" class="block"/>
+
+  2. At the prompt, type the following:
   ```ps
   Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
   Install-Module -Name DockerMsftProvider -Force
@@ -28,9 +31,9 @@ We now have an updated Windows operating system.  We are ready to install Docker
   Restart-Computer -Force
   ```
 
-  2. This will download the Docker engine and install it as a background service.
+  3. This will download the Docker engine and install it as a background service.
 
-  3. After you run the above commands, your virtual machine will reboot forcing a disconnect.  Go ahead and reconnect.
+  4. After you run the above commands, your virtual machine will reboot forcing a disconnect.  Go ahead and reconnect.
 
 #### Ensure Docker Engine is Running
 

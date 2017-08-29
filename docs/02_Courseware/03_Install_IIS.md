@@ -1,14 +1,12 @@
 ## Overview
-The final two elements of preparing our Windows Server virtual machine is to install Internet Information Server (IIS) and configure the necessary port (80) in the fireall to allow HTTP requests.
+The final two elements of preparing our Windows Server virtual machine is to install Internet Information Server (IIS) and configure the necessary port (80) in the firewall to allow HTTP requests.
 
 ## Install IIS
 Since, for this example, we will be deploying and hosting a basic, static website, the standard IIS components are sufficient.  We could install them through the Server Manager, but we are going to use PowerShell so that we become familiar with executing tasks for later when we need to automate this process in Docker.
 
-!!<h4>IIS Management Console</h4>In this step, we will install the IIS Management Console.  However, when we build our container, we will use Microsoft Nano Server as the base image. Nano Server has no UI.  Therefore, keep in mind that when we build our Dockerfile, we will <strong>not</strong> include the management interface.
-
   1. Open PowerShell in elevated mode (with Administrator privileges):
      <img src="../images/pwershell-admin.png" class="block"/>
-  2. Type and execute the command `Install-WindowsFeature -Name Web-Server, Web-Mgmt-Tools, NET-Framework-45-ASPNET, Web-App-Dev, Web-Net-Ext, Web-Net-Ext45, Web-AppInit, Web-Asp-Net, Web-Asp-Net45, Web-ISAPI-Ext, Web-ISAPI-Filter`
+  2. Type and execute the command `Install-WindowsFeature -Name Web-Server, Web-Mgmt-Tools, NET-Framework-45-ASPNET, Web-App-Dev, Web-Net-Ext45, Web-AppInit, Web-Asp-Net45, Web-ISAPI-Ext, Web-ISAPI-Filter`
   3. You should then see the components download and install.
      <img src="../images/install-iis.jpg" class="block"/>
   4. It shouldn't be necessary, but just to be safe, let's reset IIS to pickup the installation of any additional modules. Type the following and press Enter: `iisreset /restart`
