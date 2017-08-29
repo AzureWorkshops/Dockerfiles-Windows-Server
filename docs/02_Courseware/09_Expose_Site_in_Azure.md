@@ -115,7 +115,7 @@ docker network create -d transparent --subnet=10.0.0.0/24 --gateway=10.0.0.1 tra
 
 This command tells Docker to create a new network using the _transparent_ driver (`-d`) with a `10.0.0.0/24` subnet and `10.0.0.1` gateway, naming it "transparent".
 
-Now, again, at the PowerShell prompt, type 'docker network ls'.  You should now see the network listed. 
+Now, again, at the PowerShell prompt, type `docker network ls`.  You should now see the network listed. 
 
 Additionally, type in:
 ```ps
@@ -167,11 +167,20 @@ This will take a second; be patient.  Once it has completed, you'll see the new 
 We've added the necessary configuration in Azure to route requests for that IP to our VM. In the next step, we'll add the IP to the machine so that it will _listen_ on that IP address. 
 
 ### Assign the IP to the Virtual NIC
-Remember the new virtual NIC that was created above when we created our transparent network?  We need to add an IP address to it.  Most of the time you would add the IP address through the GUI, but we cannot do this.  We need to use a feature called "SkipAsSource" [more info](https://blogs.technet.microsoft.com/rmilne/2012/02/08/fine-grained-control-when-registering-multiple-ip-addresses-on-a-network-card/).  Therefore, we must use the `netsh` command once again so that the SkipAsSource feature is not enabled.
+Remember the new virtual NIC that was created above when we created our transparent network?  We need to add an IP address to it.  Most of the time you would add the IP address through the GUI, but we cannot do this.  We need to use a feature called "SkipAsSource" ([more info](https://blogs.technet.microsoft.com/rmilne/2012/02/08/fine-grained-control-when-registering-multiple-ip-addresses-on-a-network-card/)).  Therefore, we must use the `netsh` command once again so that the SkipAsSource feature is not enabled.
 
-Go back to your VM and at the command prompt, type `netsh int ipv4 add address "vEthernet (HNSTransparent)" 10.0.0.100 255.255.255.0` (again, use the virtual NIC name, IP address and subnet mask acquired from the various steps above).
+Go back to your VM and at the command prompt, type:
+```ps
+netsh int ipv4 add address "vEthernet (HNSTransparent)" 10.0.0.100 255.255.255.0
+```
+(again, use the virtual NIC name, IP address and subnet mask acquired from the various steps above)
 
-Now, if we type the command `netsh interface ip show config name="vEthernet (HNSTransparent)"`, we see that both IPs (our original static IP and our new IP)have been assigned to our transparent network: <img src="../images/add_ip_vnic.jpg" class="block"/>
+Now, type the command
+```ps
+netsh interface ip show config name="vEthernet (HNSTransparent)"
+```
+
+We see that both IPs (our original static IP and our new IP)have been assigned to our transparent network: <img src="../images/add_ip_vnic.jpg" class="block"/>
 
 Our machine will now listen for requests on that IP address.  Our routing is complete. Now, we simply need to add a container and assign it that IP address.
 
