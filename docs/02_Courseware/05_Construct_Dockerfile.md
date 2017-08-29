@@ -21,7 +21,7 @@ Let's go ahead and create the Dockerfile contents.  We'll then examine each line
   2. Name the new file **Dockerfile**. (Note: This will add the ".txt" extension to the file automatically. Typically, our Dockerfiles shouldn't have an extension, but that's okay.  We'll work with it.)
 
   3. Enter the following _without_ the line numbers. The line numbers are provided for reference below.
-  ```bash
+  ```ps
   1   FROM microsoft/iis:latest
   2   SHELL ["powershell"]
   3   MAINTAINER Your Name <you@yourcompany.com>
