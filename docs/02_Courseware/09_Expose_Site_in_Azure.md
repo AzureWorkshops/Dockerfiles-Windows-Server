@@ -125,7 +125,7 @@ This will allow you to view the available network interfaces (NICs). <img src=".
 
 You'll notice that, when we created our transparent network, Docker created a new virtual network interface _vEthernet (HNSTransparent)_. This is the NIC we'll add our IPs to in the steps below.
 
-We've now created our transparent network and we ready to add our publicly accessible containers.
+We've now created our transparent network and we're ready to add our publicly accessible containers.
 
 ## Add Public Containers
 After all of that, we're now finally ready to add our public containers and access them from outside of Azure.
@@ -135,7 +135,7 @@ After all of that, we're now finally ready to add our public containers and acce
 ### Pick a "Reserved" IP
 Theoretically, our transparent network doesn't exist outside of our VM so Azure DHCP/DNS will not automatically assign an IP address to our container.  We must assign an IP address to it manually. First, let's pick an IP.
 
-I'm going to start with *.*.*.100 as my first container's IP address.  For my network (your's may be different), the full IP address will be `10.0.0.100` with a subnet mask of `255.255.255.0` (again, you get the subnet and mask from the `netsh` command).
+I'm going to start with \*.\*.\*.100 as my first container's IP address.  For my network (your's may be different), the full IP address will be `10.0.0.100` with a subnet mask of `255.255.255.0` (again, you get the subnet and mask from the `netsh` command).
 
 ### "Reserve" the IP in Azure
 So, first, we're not _really_ reserving the IP address.  But, in a way, we kind of are.  We are going to manually assign our IP as a _secondary_ IP to our virtual machine's NIC.
