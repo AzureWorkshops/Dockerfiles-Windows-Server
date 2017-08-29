@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Construct Dockerfile - Docker Automation with Dockerfiles (Windows)</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Joshua Davis">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Docker Automation with Dockerfiles (Windows)</a> / <a href="../Courseware/Introduction.html">Courseware</a> / <a href="../Courseware/Construct_Dockerfile.html">Construct Dockerfile</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item '><a href="../Courseware/Introduction.html">Introduction</a></li><li class='Nav__item '><a href="../Courseware/Create_Virtual_Machine.html">Create Virtual Machine</a></li><li class='Nav__item '><a href="../Courseware/Install_Docker.html">Install Docker</a></li><li class='Nav__item '><a href="../Courseware/Install_IIS.html">Install IIS</a></li><li class='Nav__item '><a href="../Courseware/Download_Sample_Website.html">Download Sample Website</a></li><li class='Nav__item Nav__item--active'><a href="../Courseware/Construct_Dockerfile.html">Construct Dockerfile</a></li><li class='Nav__item '><a href="../Courseware/Build_Image.html">Build Image</a></li><li class='Nav__item '><a href="../Courseware/Deploy_Container.html">Deploy Container</a></li><li class='Nav__item '><a href="../Courseware/Expose_Site_in_Azure.html">Expose Site in Azure</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Docker Automation with Dockerfiles (Windows).pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Construct Dockerfile</h1>
+                    <div class="date"> Tuesday, August 29, 2017 12:25 AM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Overview">Overview</h2>
+<p>Based on most of the previous steps, we are ready to build our Dockerfile.  We will mimic those steps for automating our image construction.</p>
+<h2 id="page_Review">Review</h2>
+<p>In preparation of writing our Dockerfile, let's review all the steps we've performed up to this point.</p>
+<ol>
+<li>Install the latest version of Windows Server.  Typically, we would use Windows Nano Server which is designed for containerized deployments.  However, preparing a Nano Server container requires Hyper-V and is a little more in-depth than what we want to accomplish for this workshop, wo we'll stick with Windows Server 2016.</li>
+<li>Install the latest updates</li>
+<li>Install and configure Docker</li>
+<li>Install and configure IIS</li>
+<li>Configure the firewall</li>
+<li>Download the sample website</li>
+</ol>
+<p>As a reminder, since we are constructing an image, we can <strong>ignore</strong> step 3.  We won't need Docker installed inside of the image.  Additionally, Microsoft is nice enough to provide us an image with IIS installed and the firewall configured.  This allows us to <strong>ignore</strong> steps 4 and 5, as well.  All we are required to do is install updates, Microsoft.NET and download our website.</p>
+<h2 id="page_Create-the-Dockerfile">Create the Dockerfile</h2>
+<p>Let's go ahead and create the Dockerfile contents.  We'll then examine each line below.</p>
+<ol>
+<li>
+<p>We need to create a Dockerfile. Somewhere on your desktop, <strong>right-click</strong>, then click <strong>New</strong>, followed by <strong>Text Document</strong>. <img src="../images/new_dockerfile.jpg" class="block"/></p>
+</li>
+<li>
+<p>Name the new file <strong>Dockerfile</strong>. (Note: This will add the &quot;.txt&quot; extension to the file automatically. Typically, our Dockerfiles shouldn't have an extension, but that's okay.  We'll work with it.)</p>
+</li>
+<li>
+<p>Enter the following <em>without</em> the line numbers. The line numbers are provided for reference below.</p>
+</li>
+</ol>
+<pre><code class="language-ps">1   FROM microsoft/iis:latest
+2   SHELL [&quot;powershell&quot;]
+3   MAINTAINER Your Name &lt;you@yourcompany.com&gt;
+4
+5   RUN Install-WindowsFeature NET-Framework-45-ASPNET ; \  
+6       Install-WindowsFeature Web-Asp-Net45 ; \
+7       Install-WindowsFeature Web-App-Dev ; \
+8       Install-WindowsFeature Web-Net-Ext45 ; \
+9       Install-WindowsFeature Web-AppInit ; \
+10      Install-WindowsFeature Web-ISAPI-Ext ; \ 
+11      Install-WindowsFeature Web-ISAPI-Filter ;
+12
+13  RUN Invoke-Command -ScriptBlock {$ci = New-CimInstance -Namespace root/Microsoft/Windows/WindowsUpdate -ClassName MSFT_WUOperationsSession; Invoke-CimMethod -InputObject $ci -MethodName ApplyApplicableUpdates; exit }
+14
+15  RUN mkdir C:\temp
+16
+17  RUN (new-object Net.WebClient).DownloadFile('https://github.com/AzureWorkshops/samples-simple-iis-website/archive/master.zip','C:\temp\master.zip');
+18  RUN Expand-Archive -LiteralPath C:\temp\master.zip -Destination C:\temp
+19  RUN (new-object -com shell.application).namespace('C:\inetpub\wwwroot\').CopyHere((new-object -com shell.application).namespace('C:\temp\samples-simple-iis-website-master').Items(), 16);
+20  RUN del c:\inetpub\wwwroot\iisstart*.*
+21
+22  EXPOSE 80
+</code></pre>
+<ol start="4">
+<li>To save, <strong>Ctrl+S</strong>
+</li>
+</ol>
+<h3 id="page_Explanation">Explanation</h3>
+<p>First, if you remember from the previous steps, we were required to open a PowerShell prompt as an Adminstrator to allow the command to be executed with elevated privileges.  By default, all Docker images execute under the identity of the built-in Administrator account.</p>
+<p><strong>Line 1:</strong> Specifies the base image, including the tag, with which we're starting. In our case, we are using the Microsoft Windows Server 2016 with IIS as the base image.</p>
+<p><strong>Line 2:</strong> Directs Docker to run everything from a PowerShell shell (not the default DOS/CMD prompt).</p>
+<p><strong>Line 3:</strong> Specifies the owner of the image with their email address.</p>
+<p><strong>Lines 5-11:</strong> Installs the Microsoft.NET Framework for ASP.NET and the ASP.NET extensions into IIS.  Most of these should already be installed by default for the image we're downloading.  However, this ensures that our system is up-to-date.</p>
+<p><strong>Line 13:</strong> Installs any necessary system updates. NOTE: On a <em>host</em> system or virtual machine, we would normally require a reboot.  However, because we are simply building an image, the image will stop naturally once it's built.  We will then only boot the image once we load it into a container.  Therefore, we theoretically have a built-in reboot in our process and a reboot here is not necessary.</p>
+<p><strong>Line 15:</strong> Creates a <code>temp</code> folder in which to store our .zip file.  In our demo, we downloaded the .zip file to our temporary <code>D:\</code> drive.  We don't have that drive in the container, so we'll use a temporary folder.</p>
+<p><strong>Line 17:</strong> Downloads the .zip file for our website to our <code>C:\temp</code> folder.</p>
+<p><strong>Line 18:</strong> Decompresses (expands) our .zip file into the <code>C:\temp</code> folder.</p>
+<p><strong>Line 19:</strong> When we decompress our .zip file, we create a subdirectory called <code>samples-simple-iis-website-master</code>.  Here, we are copying the contents of that subfolder to our main IIS folder <code>C:\inetpub\wwwroot</code>.</p>
+<p><strong>Line 20:</strong> Deletes the two IIS placeholder files.</p>
+<p><strong>Line 22:</strong> IIS, by default, uses port 80.  Therefore, similar to a firewall in the image, we open, or <em>expose</em>, the port to the outside host.  We will bind to this open port later when we run a container based on this image. NOTE: This particular image, <em>microsoft/iis</em>, already exposes port 80 for us, so we're technically not required to add this line.  However, it's still a good practice to explicitly include this line in case we need to reuse this Dockerfile or the underlying base ever changes.</p>
+<p>That's it! That's all there is to creating a Dockerfile.</p>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Courseware/Download_Sample_Website.html">Previous</a></li>
+                                                    <li class=pager-next><a href="../Courseware/Build_Image.html">Next</a></li>            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                <strong>In this article</strong><ol><li><a href="#page_Overview">Overview</a></li><li><a href="#page_Review">Review</a></li><li><a href="#page_Create-the-Dockerfile">Create the Dockerfile</a></li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>

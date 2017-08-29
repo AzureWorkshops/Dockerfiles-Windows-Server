@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Build Image - Docker Automation with Dockerfiles (Windows)</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Joshua Davis">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Docker Automation with Dockerfiles (Windows)</a> / <a href="../Courseware/Introduction.html">Courseware</a> / <a href="../Courseware/Build_Image.html">Build Image</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item '><a href="../Courseware/Introduction.html">Introduction</a></li><li class='Nav__item '><a href="../Courseware/Create_Virtual_Machine.html">Create Virtual Machine</a></li><li class='Nav__item '><a href="../Courseware/Install_Docker.html">Install Docker</a></li><li class='Nav__item '><a href="../Courseware/Install_IIS.html">Install IIS</a></li><li class='Nav__item '><a href="../Courseware/Download_Sample_Website.html">Download Sample Website</a></li><li class='Nav__item '><a href="../Courseware/Construct_Dockerfile.html">Construct Dockerfile</a></li><li class='Nav__item Nav__item--active'><a href="../Courseware/Build_Image.html">Build Image</a></li><li class='Nav__item '><a href="../Courseware/Deploy_Container.html">Deploy Container</a></li><li class='Nav__item '><a href="../Courseware/Expose_Site_in_Azure.html">Expose Site in Azure</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Docker Automation with Dockerfiles (Windows).pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Build Image</h1>
+                    <div class="date"> Tuesday, August 29, 2017 12:25 AM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Overview">Overview</h2>
+<p>Now that we have our Dockerfile, let's build our image from it.</p>
+<h2 id="page_Build-the-Docker-Image">Build the Docker Image</h2>
+<p>Once we have our Dockerfile, building the image is pretty simple.</p>
+<p>From the PowerShell window, type the following:</p>
+<pre><code class="language-ps">Get-Content &quot;c:\users\localadmin\desktop\Dockerfile.txt&quot; | docker build -t test/simpleweb -
+</code></pre>
+<p>This will build an image using <code>test/simpleweb</code> as the repository name. We are using PowerShell's <code>Get-Content</code> command to read the contents of our previously created Dockerfile and then pipe them to Docker's build command.</p>
+<p>Due to the size of Windows Server, the initial build will take some time because it must download the base image first.  Watch how Docker will step through our Dockerfile to build our image. Keep in mind while you watch this process that each step in our Dockerfile constitutes a layer in our image.  We'll see the results of this below.</p>
+<h2 id="page_Check-Your-Images">Check Your Images</h2>
+<p>From the command prompt, type the following:</p>
+<pre><code class="language-ps">docker images
+</code></pre>
+<p>You should see something similar to:</p>
+<pre><code class="language-ps">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+test/simpleweb      latest              9f4ec58ca830        3 minutes ago       11.1GB
+microsoft/iis       latest              4f803ffceb53        37 hours ago        10.6GB
+</code></pre>
+<p>Our image has been built using the specified repository name. You'll also notice that the <code>microsoft/iis</code> image has been downloaded.  This is because the build process required Windows Server with IIS in order to build our image.  Now that our image has been built, you could delete the <code>microsoft/iis</code> image if you wanted to.  Finally, when looking at the image sizes, you'll see that our image is 500MB larger due to the installation of Microsoft.NET, ASP.NET and other dependencies.</p>
+<p>Be aware that the Nano Server image is only 1.07GB compared to the full Windows Server at 10.6GB which makes Nano Server more ideal for containers.  Its really not best practice to use Windows Server in production as downloading 10.6GB and deploying that across your enterpise could consume a lot of bandwidth.  For production, it's best to opt for Nano Server.  But, again, Nano Server requires a little more preparation that extends a tad further beyond the scope of this workshop.</p>
+<h2 id="page_View-Image-History">View Image History</h2>
+<p>What if we wanted to see how our image is constructed? Or, what if we wanted to see exactly how much disk space each layer of our image required? We could find this out by checking the image's history.</p>
+<pre><code class="language-ps">docker image history test/simpleweb
+</code></pre>
+<p>When you run the above command, you see each command along from our Dockerfile along with it's layer id and the space requirements, if any.</p>
+<p>We've now built a custom image based on a Dockerfile. We can use our custom image to deploy containers locally. Or, we could upload our image to a central repository so that others could leverage our image's functionality.</p>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Courseware/Construct_Dockerfile.html">Previous</a></li>
+                                                    <li class=pager-next><a href="../Courseware/Deploy_Container.html">Next</a></li>            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                <strong>In this article</strong><ol><li><a href="#page_Overview">Overview</a></li><li><a href="#page_Build-the-Docker-Image">Build the Docker Image</a></li><li><a href="#page_Check-Your-Images">Check Your Images</a></li><li><a href="#page_View-Image-History">View Image History</a></li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>

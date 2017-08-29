@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Deploy Container - Docker Automation with Dockerfiles (Windows)</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="description" content="Azure Workshops" />
+    <meta name="author" content="Joshua Davis">
+    <link rel="icon" href="" type="image/x-icon">
+    
+    <!-- Font -->
+    
+    <!-- CSS -->
+    <link href='../themes/azure/css/vs.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme.css' rel='stylesheet' type='text/css'><link href='../themes/azure/css/theme-white.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="">
+
+        <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Azure Workshops</a>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div id="content-wrapper" class="container-fluid">
+    <div class="row hidden-print">
+        <div class="col-md-10 col-md-offset-1 breadcrumbs">
+            <a href="../index.html">Docker Automation with Dockerfiles (Windows)</a> / <a href="../Courseware/Introduction.html">Courseware</a> / <a href="../Courseware/Deploy_Container.html">Deploy Container</a>        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 hidden-print">
+            <div data-spy="affix" data-offset-top="100">
+                <!-- Navigation -->
+                <ul class='Nav'><li class='Nav__item '><a href="../Overview.html">Overview</a></li><li class='Nav__item  has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Getting Started</a><ul class='Nav'><li class='Nav__item '><a href="../Getting_Started/Requirements.html">Requirements</a></li><li class='Nav__item '><a href="../Getting_Started/Azure_Registration.html">Azure Registration</a></li></ul></li><li class='Nav__item Nav__item--open has-children'><a href="#" class="aj-nav folder"><i class="Nav__arrow">&nbsp;</i>Courseware</a><ul class='Nav'><li class='Nav__item '><a href="../Courseware/Introduction.html">Introduction</a></li><li class='Nav__item '><a href="../Courseware/Create_Virtual_Machine.html">Create Virtual Machine</a></li><li class='Nav__item '><a href="../Courseware/Install_Docker.html">Install Docker</a></li><li class='Nav__item '><a href="../Courseware/Install_IIS.html">Install IIS</a></li><li class='Nav__item '><a href="../Courseware/Download_Sample_Website.html">Download Sample Website</a></li><li class='Nav__item '><a href="../Courseware/Construct_Dockerfile.html">Construct Dockerfile</a></li><li class='Nav__item '><a href="../Courseware/Build_Image.html">Build Image</a></li><li class='Nav__item Nav__item--active'><a href="../Courseware/Deploy_Container.html">Deploy Container</a></li><li class='Nav__item '><a href="../Courseware/Expose_Site_in_Azure.html">Expose Site in Azure</a></li></ul></li></ul>
+                <div class="Links">
+                    
+                    <div class="pdf-link">
+                        <hr />
+                        <a href="../pdf/Docker Automation with Dockerfiles (Windows).pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Download PDF</span></a>
+                    </div>
+
+                                            <hr/>
+                        <div class="Twitter">
+                                                            <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=azureworkshops&amp;show_count=false"></iframe>
+                                <br />
+                                <br />
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <article class="Page">
+    <div class="pageHeader">
+        <h1>Deploy Container</h1>
+                    <div class="date"> Tuesday, August 29, 2017 12:25 AM</div>
+            </div>
+    <div class="copy">
+        <h2 id="page_Overview">Overview</h2>
+<p>Our custom image has now been created and is currently sitting in our local repository. Let's instantiate a container based on that image.</p>
+<h2 id="page_Start-a-Container">Start a Container</h2>
+<p>To start a container from our image is very simple.  The only thing we need to remember is exposing the internal port to the host.</p>
+<pre><code class="language-ps">docker run -d -p 8080:80 --name 'web_8080' test/simpleweb 
+docker run -d -p 8081:80 --name 'web_8081' test/simpleweb
+docker run -d -p 8082:80 --name 'web_8082' test/simpleweb
+</code></pre>
+<p>We've started 3 separated instances of our web server. We've bound the web server's internal port 80 to three host ports (e.g 8080-8082). We've also supplied meaningful names to our containers.  We can reference those containers by the names we've specified for easier management.  For example, we can restart or stop a container using it's name instead of the container id.</p>
+<p>Check the running images:</p>
+<pre><code class="language-ps">docker ps
+</code></pre>
+<p>You should see something like the following:</p>
+<pre><code class="language-ps">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                    NAMES
+3d1929c8e1b5        test/simpleweb      &quot;C:\\ServiceMonitor...&quot;  3 seconds ago        Up 2 seconds        0.0.0.0:8082-&gt;80/tcp     web_8082
+323a65fa5143        test/simpleweb      &quot;C:\\ServiceMonitor...&quot;  11 seconds ago       Up 10 seconds       0.0.0.0:8081-&gt;80/tcp     web_8081
+7d4fee5c8f89        test/simpleweb      &quot;C:\\ServiceMonitor...&quot;  About a minute ago   Up 59 seconds       0.0.0.0:8080-&gt;80/tcp     web_8080
+</code></pre>
+<p>Notice that all three containers are running, but, as we've specified, are bound to different ports and have custom names.</p>
+<p>For practice, restart <code>web_8081</code>:</p>
+<pre><code class="language-ps">docker restart web_8081
+</code></pre>
+<p>Executing the command, may take a second. After it completes, check the running images again. You should now see that the uptime for <code>web_8081</code> is less than the other two containers.</p>
+<p>We have now successfully created three container instances running our custom image.</p>
+<h2 id="page_View-the-Container-Websites">View the Container Websites</h2>
+<p>Before we attempt to expose our sites to the outside world, let's make sure that we can access them locally on the VM.</p>
+<ol>
+<li>
+<p>Open a web browser on the virtual server and try to navigate to <code>http://localhost:8080</code> (our <code>web_8080</code> container).  Oops. Is seems we received an error.  What did we do wrong?  Let's investigate.</p>
+</li>
+<li>
+<p>Look again at the output of the <code>docker ps</code> command.</p>
+</li>
+<li>
+<p>Notice the <em>Ports</em> column.  Our external port is not mapped to the loopback address (e.g. <code>127.0.0.1</code> or <code>localhost</code>).  Long story short, this is due to a way Windows maps its network interfaces.</p>
+</li>
+<li>
+<p>We need to get the actual, virtual IP address of the container.  To do this, type the following at the PowerShell prompt changing the container name for each running container:</p>
+</li>
+</ol>
+<pre><code class="language-ps">docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}' web_8080
+</code></pre>
+<ol start="5">
+<li>Now, let's use the returned IP instead of the <code>localhost</code> to load our website.  In the browser change the URL to <code>http://&lt;web_8080's virtual IP address:8080&gt;</code> (e.g. http://172.26.67.126:8080).  This should display our <em>Hello World</em> sample web site.</li>
+</ol>
+    </div>
+
+            <nav class="hidden-print">
+            <ul class="pager">
+                                    <li class=pager-prev><a href="../Courseware/Build_Image.html">Previous</a></li>
+                                                    <li class=pager-next><a href="../Courseware/Expose_Site_in_Azure.html">Next</a></li>            </ul>
+        </nav>
+    </article>
+        </div>
+        <div class="col-md-2 hidden-print">
+            <div class="article-links" data-spy="affix" data-offset-top="100">
+                <strong>In this article</strong><ol><li><a href="#page_Overview">Overview</a></li><li><a href="#page_Start-a-Container">Start a Container</a></li><li><a href="#page_View-the-Container-Websites">View the Container Websites</a></li></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="footer" class="container-fluid hidden-print">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+            
+            </div>
+            <div class="col-md-8" style="text-align:right;">
+            This work is licensed under a Creative Commons Attribution 4.0 International License.
+            </div>
+        </div>
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- JS -->
+    
+    <script src="../themes/azure/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../themes/azure/js/theme.js"></script>
+
+</body>
+</html>
