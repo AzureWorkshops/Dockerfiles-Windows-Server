@@ -16,7 +16,7 @@ As a reminder, since we are constructing an image, we can **ignore** step 3.  We
 ## Create the Dockerfile
 Let's go ahead and create the Dockerfile contents.  We'll then examine each line below.
 
-  1. We need to create a Dockerfile. Somewhere on your desktop, **right-click**, then click **New**, followed by **Text Document**.
+  1. We need to create a Dockerfile. Somewhere on your desktop, **right-click**, then click **New**, followed by **Text Document**. <img src="../images/new_dockerfile.jpg" class="block"/>
 
   2. Name the new file **Dockerfile**. (Note: This will add the ".txt" extension to the file automatically. Typically, our Dockerfiles shouldn't have an extension, but that's okay.  We'll work with it.)
 
