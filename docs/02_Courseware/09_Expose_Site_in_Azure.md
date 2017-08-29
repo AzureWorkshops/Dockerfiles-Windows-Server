@@ -103,17 +103,25 @@ Among other things, you'll see the subnet, gateway and the containers attached t
 
 In this process, we are going to eventually _reserve_ some IP addresses within our subnet to be used by our containers.  Again, keep in mind, that our containers must reside on the _same subnet_ as our VM.
 
-!! <h4>Multi-Homing</h4> Ideally, you would probably to have two NICs attached to this VM and set it up as a multi-homed server.  This would allow you to have a separate subnet that's dedicated to your containers.  However, this is not the recommended setup for production as you would utilize some type of orchestrator with service discovery and a mesh network.
+!! <h4>Multi-Homing</h4> Ideally, you would probably have two NICs attached to this VM and set it up as a multi-homed server.  This would allow you to have a separate subnet that's dedicated to your containers.  However, this is not the recommended setup for production as you would utilize some type of orchestrator with service discovery and a mesh network.
 
 Let's create our transparent network to sit inside our subnet.
 
-In PowerShell, type `docker network create -d transparent --subnet=10.0.0.0/24 --gateway=10.0.0.1 transparent` and press Enter. **IMPORTANT:** Refer to the information you received from the last `netsh` command.  (NOTE: You may _temporarily_ lose your connection, but you should automatically be reconnected within a few seconds.)
+In PowerShell, type the following and press Enter.
+```ps
+docker network create -d transparent --subnet=10.0.0.0/24 --gateway=10.0.0.1 transparent
+```
+**IMPORTANT:** Refer to the information you received from the last `netsh` command.  (NOTE: You may _temporarily_ lose your connection, but you should automatically be reconnected within a few seconds.)
 
 This command tells Docker to create a new network using the _transparent_ driver (`-d`) with a `10.0.0.0/24` subnet and `10.0.0.1` gateway, naming it "transparent".
 
 Now, again, at the PowerShell prompt, type 'docker network ls'.  You should now see the network listed. 
 
-Additionally, type in `netsh interface show interface` to view the available network interfaces (NICs). <img src="../images/docker_create_transparent.jpg" class="block"/>
+Additionally, type in:
+```ps
+netsh interface show interface
+```
+This will allow you to view the available network interfaces (NICs). <img src="../images/docker_create_transparent.jpg" class="block"/>
 
 You'll notice that, when we created our transparent network, Docker created a new virtual network interface _vEthernet (HNSTransparent)_. This is the NIC we'll add our IPs to in the steps below.
 
