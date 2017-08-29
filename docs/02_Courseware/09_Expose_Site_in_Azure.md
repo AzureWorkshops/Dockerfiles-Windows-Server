@@ -189,7 +189,10 @@ Our machine will now listen for requests on that IP address.  Our routing is com
 ### Create a Container on Our Transparent Network
 We already have our first three containers running on our `nat` network.  Unfortunately, there's no easy way to reconfigure a container's port mapping; and, you can't change it while the container is running.  So, we'll create a new container and attach it to our transparent network.
 
-From the PowerShell command line, type `docker run -d --net=transparent --ip=10.0.0.100 --name "web_public100" test/simpleweb`.
+From the PowerShell command line, type
+```ps
+docker run -d --net=transparent --ip=10.0.0.100 --name "web_public100" test/simpleweb
+```
 
 This command does a couple of things.  First, as you may remember from earlier, we are running this container in the background, or as "detached" (`-d`).  Second, we explicitly specify the network in which to attach our container.  In our case `transparent`.  When we use a transparent network (or a few other types), we're required to specify the IP address as, again, the host network's DHCP cannot assign an IP address.  The rest of this command should be familiar.
 
